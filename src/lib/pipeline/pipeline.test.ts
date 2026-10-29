@@ -42,7 +42,8 @@ async function setup(text: string, extra: Record<string, unknown> = {}) {
   const draft = await parseBrief(text, { today: "2026-10-29", buyerCity: "Gurugram", buyerPincode: "122002" });
   const { data: brief } = await db
     .from("briefs")
-    .insert({ ...draft, buyer_id: buyer.id, owner_id: "u1", raw_text: text, delivery_state: "Haryana", status: "confirmed", ...extra })
+    // Fixed id: the simulator seeds its randomness from the brief id, so this keeps runs reproducible.
+    .insert({ id: "00000000-0000-4000-8000-000000000001", ...draft, buyer_id: buyer.id, owner_id: "u1", raw_text: text, delivery_state: "Haryana", status: "confirmed", ...extra })
     .select("*")
     .single();
   await db.from("jobs").insert({ type: "scout", brief_id: brief.id, dedupe_key: `scout:${brief.id}:1` });
