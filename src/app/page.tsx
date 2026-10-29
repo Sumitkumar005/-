@@ -348,7 +348,7 @@ export default function Landing() {
       {/* CTA */}
       <section className="px-5 pb-20">
         <div className="relative mx-auto max-w-[1440px] overflow-hidden rounded-[28px] bg-ink px-8 py-16 text-center text-white">
-          <div className="grid-bg absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]" />
+          <div className="grid-bg absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black_35%,transparent_85%)]" />
           <div className="absolute inset-x-0 -top-32 mx-auto h-64 w-[34rem] rounded-full bg-marigold/25 blur-3xl" />
           <p lang="hi" className="relative font-hindi text-[18px] font-semibold text-marigold">भाव-ताव हम करेंगे</p>
           <h2 className="relative mt-2 text-[34px] font-bold sm:text-[44px]">Stop calling. Start choosing.</h2>
