@@ -5,6 +5,8 @@ import { HeroDemo } from "@/components/landing/hero-demo";
 import { BeforeAfter, HowItWorks } from "@/components/landing/how-it-works";
 import { PRODUCTS } from "@/components/landing/illustrations";
 import { FreeTools } from "@/components/landing/free-tools";
+import { ChatWidget } from "@/components/landing/chat-widget";
+import { FAQ, PLANS } from "@/components/landing/content";
 import { computeLanded, type QuoteTerms } from "@/lib/domain/landed-cost";
 
 // Example quotes for 5,000 cups. Landed costs are computed from the stated terms, not typed in.
@@ -31,14 +33,6 @@ const COMPARE = [
   ["You pay for", "Nothing. Sellers pay for your lead", "A shortlist you can order from"],
 ];
 
-const FAQ = [
-  ["Is this a marketplace?", "No. We don't hold stock or take a cut from suppliers. We work for the buyer, you pay us for the sourcing work, and you order directly from the supplier you pick."],
-  ["Will suppliers know who I am?", "Not until you choose them. Our agent says it is calling for a café in Gurugram or a D2C brand in Noida, never your name or number."],
-  ["Is calling suppliers with AI allowed?", "Every call opens by saying it's an AI assistant and that the call is recorded. We call only in business hours, at most once a day per supplier, and anyone who says stop is never called again. Calls go through a registered telephony provider."],
-  ["How do you check a supplier is real?", "Every GSTIN is checked for format, checksum and state. With a GST data provider connected we also check active status and filing. Then our own records: did they honour the quote, deliver on time, pass quality."],
-  ["What does landed cost mean?", "What one unit costs at your door: price converted to your unit, plus GST if extra, plus freight, plus any one-time plate or setup cost spread over the order."],
-  ["Which categories do you cover?", "Food and D2C packaging in Delhi NCR first: paper cups, food boxes, carry bags, pouches, mono cartons, labels, and fabric for boutiques. Anything else we source by hand while we build the network."],
-];
 
 export default function Landing() {
   return (
@@ -304,11 +298,7 @@ export default function Landing() {
         <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
           <SectionHead eyebrow="Pilot pricing" title="Pay for a shortlist, never for leads" body="Suppliers pay us nothing. We only earn by getting you a better deal." />
           <div className="mx-auto mt-12 grid max-w-[1120px] gap-4 md:grid-cols-3">
-            {[
-              { name: "First brief", price: "Free", per: "", items: ["Full sourcing run", "Calls, vetting, quote sheet", "Negotiation on top three"], cta: "Start free", hi: false },
-              { name: "Per brief", price: "₹1,499", per: "/ brief", items: ["Up to 15 suppliers called", "Shortlist within 48 hours", "Search again once, free"], cta: "Start sourcing", hi: true },
-              { name: "Repeat buyer", price: "₹4,999", per: "/ month", items: ["Up to 6 briefs a month", "One-tap reorders", "Price alerts on your items"], cta: "Talk to us", hi: false },
-            ].map((p) => (
+            {PLANS.map((p) => (
               <div key={p.name} className={cx("relative flex flex-col rounded-[22px] border p-7", p.hi ? "border-ink bg-ink text-white shadow-lift" : "border-line bg-white")}>
                 {p.hi ? <span className="absolute -top-3 left-7 rounded-full bg-marigold px-2.5 py-0.5 text-[11px] font-semibold text-ink">Most picked</span> : null}
                 <p className={cx("text-[13px] font-semibold", p.hi ? "text-white/60" : "text-muted")}>{p.name}</p>
@@ -365,6 +355,8 @@ export default function Landing() {
           <p>Made for India&apos;s small buyers. Launching in Delhi NCR.</p>
         </div>
       </footer>
+
+      <ChatWidget />
     </div>
   );
 }

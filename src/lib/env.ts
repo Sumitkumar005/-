@@ -47,6 +47,18 @@ export const env = {
   get groqRpm() {
     return int("GROQ_RPM", 28);
   },
+  /** Separate key for the website chat so visitors never eat the pipeline's quota. */
+  get groqChatApiKey() {
+    return str("GROQ_CHAT_API_KEY");
+  },
+  /** Chat messages allowed per visitor IP per day. */
+  get chatPerIpDaily() {
+    return int("CHAT_PER_IP_DAILY", 30);
+  },
+  /** Chat messages allowed across all visitors per day. Groq's free tier allows about 1,000. */
+  get chatGlobalDaily() {
+    return int("CHAT_GLOBAL_DAILY", 800);
+  },
   get voiceProvider(): "simulated" | "bolna" {
     return str("VOICE_PROVIDER") === "bolna" ? "bolna" : "simulated";
   },
