@@ -92,7 +92,7 @@ export function LoginForm() {
       <p className="mt-2 text-[15px] text-muted">{subtitle}</p>
 
       {mode !== "reset" ? (
-        <div className="relative mt-8 grid grid-cols-2 rounded-xl bg-paper p-1 text-sm font-semibold ring-1 ring-line">
+        <div className="relative mt-8 [@media(max-height:820px)]:mt-5 grid grid-cols-2 rounded-xl bg-paper p-1 text-sm font-semibold ring-1 ring-line">
           <span className={cx("absolute inset-y-1 w-[calc(50%-4px)] rounded-lg bg-white shadow-card transition-transform duration-300", mode === "signup" ? "translate-x-[calc(100%+0px)] left-1" : "left-1")} />
           {(["signin", "signup"] as const).map((m) => (
             <button key={m} type="button" onClick={() => switchMode(m)} className={cx("focus-ring relative z-10 rounded-lg py-2.5 transition-colors", mode === m ? "text-ink" : "text-muted hover:text-ink")}>
@@ -102,7 +102,7 @@ export function LoginForm() {
         </div>
       ) : null}
 
-      <form onSubmit={submit} className="mt-6 space-y-4">
+      <form onSubmit={submit} className="mt-6 space-y-4 [@media(max-height:820px)]:mt-4 [@media(max-height:820px)]:space-y-3">
         {mode === "signup" ? (
           <Field id="name" label="Your name" icon={<User className="h-[18px] w-[18px]" />}>
             <input id="name" value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" required placeholder="Sumit Kumar" className={inputCls} />
@@ -156,7 +156,7 @@ export function LoginForm() {
 
       {mode !== "reset" ? (
         <>
-          <div className="my-6 flex items-center gap-3 text-[12px] text-muted">
+          <div className="my-6 flex items-center gap-3 text-[12px] text-muted [@media(max-height:820px)]:my-4">
             <span className="h-px flex-1 bg-line" /> or <span className="h-px flex-1 bg-line" />
           </div>
           <Button type="button" variant="outline" size="lg" className="w-full" disabled={!!busy} onClick={magicLink}>
