@@ -61,7 +61,7 @@ export function AppShell({ children, businessName, email, isOps, demoNotes }: { 
             </span>
           </div>
         ) : null}
-        <main className="mx-auto max-w-6xl px-5 py-8 lg:px-8">{children}</main>
+        <main className="mx-auto max-w-[1440px] px-5 py-8 lg:px-10">{children}</main>
       </div>
     </div>
   );

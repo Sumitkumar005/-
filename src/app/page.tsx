@@ -36,7 +36,7 @@ export default function Landing() {
     <div className="bg-white">
       {/* Nav */}
       <header className="sticky top-0 z-40 border-b border-white/[0.06] bg-ink/85 backdrop-blur-lg">
-        <nav className="mx-auto flex h-16 max-w-[1120px] items-center justify-between px-5">
+        <nav className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12">
           <Logo dark />
           <div className="hidden items-center gap-1 text-[14px] text-white/65 md:flex">
             {[["How it works", "#how"], ["Quote sheet", "#compare"], ["Trust", "#trust"], ["Pricing", "#pricing"], ["FAQ", "#faq"]].map(([l, h]) => (
@@ -52,9 +52,11 @@ export default function Landing() {
 
       {/* Hero */}
       <section className="relative -mt-16 overflow-hidden bg-ink pt-16 text-white">
-        <div className="grid-bg absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_75%)]" />
-        <div className="absolute right-[-10%] top-[-20%] h-[480px] w-[480px] rounded-full bg-marigold/15 blur-[120px]" />
-        <div className="relative mx-auto grid max-w-[1120px] items-center gap-12 px-5 pb-20 pt-14 lg:grid-cols-[1fr_460px] lg:gap-16 lg:pb-24 lg:pt-20">
+        <div className="grid-bg absolute inset-0 [mask-image:linear-gradient(to_bottom,black_70%,transparent)]" />
+        <div className="absolute right-[-8%] top-[-25%] h-[620px] w-[620px] rounded-full bg-marigold/[0.16] blur-[130px]" />
+        <div className="absolute bottom-[-30%] left-[-10%] h-[520px] w-[520px] rounded-full bg-[#14B8A6]/[0.12] blur-[130px]" />
+        <div className="absolute left-1/2 top-0 h-px w-[60%] -translate-x-1/2 bg-gradient-to-r from-transparent via-marigold/50 to-transparent" />
+        <div className="relative mx-auto grid max-w-[1440px] items-center gap-12 px-5 sm:px-8 lg:px-12 pb-20 pt-14 lg:grid-cols-[1fr_460px] lg:gap-16 xl:grid-cols-[1fr_520px] xl:gap-24 lg:pb-24 lg:pt-20">
           <div className="animate-rise">
             <a href="#how" className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] py-1 pl-1 pr-3 text-[13px] text-white/75 transition hover:border-white/20">
               <span className="rounded-full bg-marigold px-2 py-0.5 text-[11px] font-semibold text-ink">New</span>
@@ -62,12 +64,12 @@ export default function Landing() {
               <span className="hidden sm:inline">Buyer-side AI sourcing for Indian wholesale</span>
               <ArrowRight weight="bold" className="h-3 w-3 transition group-hover:translate-x-0.5" />
             </a>
-            <h1 className="mt-6 text-[34px] font-bold leading-[1.05] tracking-[-0.03em] sm:text-[52px]">
+            <h1 className="mt-6 text-[34px] font-bold leading-[1.05] tracking-[-0.03em] sm:text-[52px] xl:text-[64px]">
               Your requirement in.
               <br />
               <span className="bg-gradient-to-r from-marigold to-[#FFD37A] bg-clip-text text-transparent">Best 3 suppliers out.</span>
             </h1>
-            <p className="mt-5 max-w-[520px] text-[17px] leading-relaxed text-white/65">
+            <p className="mt-5 max-w-[560px] text-[17px] leading-relaxed text-white/65 xl:text-[19px]">
               BhavTaav calls wholesalers for you in Hindi and English, checks their GST, compares every quote rupee for rupee at your door and negotiates. You only talk to the ones worth talking to.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -78,7 +80,7 @@ export default function Landing() {
                 See how it works
               </ButtonLink>
             </div>
-            <div className="mt-10 grid max-w-[520px] grid-cols-2 gap-x-6 gap-y-3 text-[13.5px] text-white/70">
+            <div className="mt-10 grid max-w-[600px] grid-cols-2 gap-x-6 gap-y-3 text-[13.5px] text-white/70">
               {[
                 [Translate, "Calls in Hindi, English, Hinglish"],
                 [SealCheck, "GSTIN checked on every supplier"],
@@ -99,7 +101,7 @@ export default function Landing() {
 
         {/* What we source */}
         <div className="relative border-t border-white/[0.06] bg-white/[0.02]">
-          <div className="mx-auto flex max-w-[1120px] items-center gap-6 overflow-x-auto px-5 py-6 [scrollbar-width:none] lg:justify-between">
+          <div className="mx-auto flex max-w-[1440px] items-center gap-6 overflow-x-auto px-5 sm:px-8 lg:px-12 py-6 [scrollbar-width:none] lg:justify-between">
             <p className="shrink-0 text-[12px] font-semibold uppercase tracking-[0.14em] text-white/40">Launching with</p>
             {PRODUCTS.map(({ name, art: Art }) => (
               <div key={name} className="flex shrink-0 items-center gap-2.5 text-[13px] text-white/75">
@@ -114,7 +116,7 @@ export default function Landing() {
       </section>
 
       {/* Before / after */}
-      <section className="mx-auto max-w-[1120px] px-5 py-20 lg:py-24">
+      <section className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12 py-20 lg:py-24">
         <SectionHead eyebrow="The problem" title="The list is the easy part" body="Post a requirement and your phone rings for days. Every seller quotes a different way, and nobody tells you who is real." />
         <div className="mt-12">
           <BeforeAfter />
@@ -123,7 +125,7 @@ export default function Landing() {
 
       {/* How it works */}
       <section id="how" className="scroll-mt-16 border-t border-line bg-paper/60 py-20 lg:py-24">
-        <div className="mx-auto max-w-[1120px] px-5">
+        <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
           <SectionHead eyebrow="How it works" title="A purchase manager that works the phones for you" body="One brief sets seven steps in motion. You watch every call, quote and counter-offer live, and step in whenever you want." />
           <div className="mt-12">
             <HowItWorks />
@@ -133,7 +135,7 @@ export default function Landing() {
 
       {/* Quote sheet */}
       <section id="compare" className="scroll-mt-16 bg-ink py-20 text-white lg:py-24">
-        <div className="mx-auto grid max-w-[1120px] items-center gap-12 px-5 lg:grid-cols-[1fr_1.15fr]">
+        <div className="mx-auto grid max-w-[1440px] items-center gap-12 px-5 sm:px-8 lg:px-12 lg:grid-cols-[1fr_1.15fr]">
           <div>
             <p className="text-[12px] font-semibold uppercase tracking-[0.14em] text-marigold">Like-for-like quote sheet</p>
             <h2 className="mt-3 text-[32px] font-bold leading-tight sm:text-[38px]">Four ways of quoting. One number to compare.</h2>
@@ -169,7 +171,7 @@ export default function Landing() {
       </section>
 
       {/* Trust */}
-      <section id="trust" className="scroll-mt-16 mx-auto max-w-[1120px] px-5 py-20 lg:py-24">
+      <section id="trust" className="scroll-mt-16 mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12 py-20 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div className="relative">
             <div className="absolute -inset-4 -z-10 rounded-[28px] bg-gradient-to-br from-marigold-soft to-mint-soft opacity-70 blur-2xl" />
@@ -212,7 +214,7 @@ export default function Landing() {
 
       {/* Comparison */}
       <section className="border-y border-line bg-paper/60 py-20 lg:py-24">
-        <div className="mx-auto max-w-[920px] px-5">
+        <div className="mx-auto max-w-[1080px] px-5 sm:px-8">
           <SectionHead eyebrow="Why buyer-side" title="A lead marketplace gives you a list. We give you a decision." />
           <div className="mt-10 overflow-hidden rounded-[20px] border border-line bg-white shadow-card">
             <div className="grid grid-cols-[1fr_1fr_1fr] border-b border-line text-[13px] font-semibold">
@@ -232,7 +234,7 @@ export default function Landing() {
       </section>
 
       {/* Flywheel + responsible calling */}
-      <section className="mx-auto grid max-w-[1120px] gap-4 px-5 py-20 lg:grid-cols-2 lg:py-24">
+      <section className="mx-auto grid max-w-[1440px] gap-4 px-5 sm:px-8 lg:px-12 py-20 lg:grid-cols-2 lg:py-24">
         <div className="relative overflow-hidden rounded-[22px] bg-ink p-8 text-white">
           <div className="absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-marigold/15 blur-3xl" />
           <TrendDown weight="duotone" className="h-7 w-7 text-marigold" />
@@ -267,9 +269,9 @@ export default function Landing() {
 
       {/* Pricing */}
       <section id="pricing" className="scroll-mt-16 border-t border-line bg-paper/60 py-20 lg:py-24">
-        <div className="mx-auto max-w-[1120px] px-5">
+        <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
           <SectionHead eyebrow="Pilot pricing" title="Pay for a shortlist, never for leads" body="Suppliers pay us nothing. We only earn by getting you a better deal." />
-          <div className="mx-auto mt-12 grid max-w-[980px] gap-4 md:grid-cols-3">
+          <div className="mx-auto mt-12 grid max-w-[1120px] gap-4 md:grid-cols-3">
             {[
               { name: "First brief", price: "Free", per: "", items: ["Full sourcing run", "Calls, vetting, quote sheet", "Negotiation on top three"], cta: "Start free", hi: false },
               { name: "Per brief", price: "₹1,499", per: "/ brief", items: ["Up to 15 suppliers called", "Shortlist within 48 hours", "Search again once, free"], cta: "Start sourcing", hi: true },
@@ -296,7 +298,7 @@ export default function Landing() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="scroll-mt-16 mx-auto max-w-[760px] px-5 py-20 lg:py-24">
+      <section id="faq" className="scroll-mt-16 mx-auto max-w-[880px] px-5 sm:px-8 py-20 lg:py-24">
         <SectionHead eyebrow="FAQ" title="Questions buyers ask us" />
         <div className="mt-10 divide-y divide-line rounded-[20px] border border-line">
           {FAQ.map(([q, a]) => (
@@ -313,7 +315,7 @@ export default function Landing() {
 
       {/* CTA */}
       <section className="px-5 pb-20">
-        <div className="relative mx-auto max-w-[1120px] overflow-hidden rounded-[28px] bg-ink px-8 py-16 text-center text-white">
+        <div className="relative mx-auto max-w-[1440px] overflow-hidden rounded-[28px] bg-ink px-8 py-16 text-center text-white">
           <div className="grid-bg absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]" />
           <div className="absolute inset-x-0 -top-32 mx-auto h-64 w-[34rem] rounded-full bg-marigold/25 blur-3xl" />
           <h2 className="relative text-[34px] font-bold sm:text-[44px]">Stop calling. Start choosing.</h2>
@@ -325,7 +327,7 @@ export default function Landing() {
       </section>
 
       <footer className="border-t border-line">
-        <div className="mx-auto flex max-w-[1120px] flex-col items-center justify-between gap-4 px-5 py-8 text-[13px] text-muted sm:flex-row">
+        <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-4 px-5 sm:px-8 lg:px-12 py-8 text-[13px] text-muted sm:flex-row">
           <Logo />
           <p>Made for India&apos;s small buyers. Launching in Delhi NCR.</p>
         </div>

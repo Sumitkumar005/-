@@ -217,6 +217,20 @@ export function BeforeAfter() {
           </div>
           <p className="mt-3 text-[11px] text-muted">Landed per cup, GST and delivery included. 9 suppliers called, 1 blocked, 3 negotiated.</p>
         </div>
+        <ol className="relative mt-5 space-y-2.5 border-l border-white/10 pl-4 text-[12.5px] text-white/70">
+          {[
+            ["Brief sent on WhatsApp", "10:02"],
+            ["9 suppliers called, 1 blocked on GST", "10:04 to 11:30"],
+            ["3 negotiated, best came down ₹0.09 a cup", "11:45"],
+            ["Shortlist on your phone", "12:10"],
+          ].map(([t, at]) => (
+            <li key={t} className="relative flex justify-between gap-3">
+              <span className="absolute -left-[21px] top-1.5 h-2 w-2 rounded-full bg-marigold" />
+              <span>{t}</span>
+              <span className="tabular shrink-0 text-white/40">{at}</span>
+            </li>
+          ))}
+        </ol>
         <div className="relative mt-6 flex flex-wrap gap-2 text-[12px] font-medium">
           {["One brief, under 2 minutes", "Zero calls you make", "One number to compare"].map((c) => (
             <span key={c} className="rounded-full bg-white/10 px-3 py-1 text-white/85">{c}</span>

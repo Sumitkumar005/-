@@ -46,7 +46,7 @@ export function HeroDemo() {
   const ready = t >= 20;
 
   return (
-    <div className="relative mx-auto w-full max-w-[460px]">
+    <div className="relative mx-auto w-full max-w-[460px] xl:max-w-[520px]">
       <div className="absolute -inset-6 -z-10 rounded-[32px] bg-marigold/20 blur-3xl" />
       <div className="rounded-[22px] border border-white/10 bg-white/[0.07] p-1.5 shadow-2xl backdrop-blur-md">
         <div className="overflow-hidden rounded-[18px] bg-white text-ink">
