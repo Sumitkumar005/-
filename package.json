@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "description": "Buyer-side AI sourcing agent for Indian wholesale",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "next dev",
     "worker": "tsx worker/index.ts",
