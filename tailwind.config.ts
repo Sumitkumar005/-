@@ -17,6 +17,7 @@ export default {
       fontFamily: {
         sans: ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "Roboto", "sans-serif"],
         display: ["Bricolage Grotesque", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+        hindi: ["Mukta", "Noto Sans Devanagari", "sans-serif"],
         mono: ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
       },
       boxShadow: {

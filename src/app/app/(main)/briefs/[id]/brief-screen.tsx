@@ -207,7 +207,7 @@ function Savings({ view, unitWord }: { view: BriefView; unitWord: string }) {
     <div className="grid gap-4 sm:grid-cols-3">
       <Card className="p-5">
         <p className="text-xs font-medium uppercase tracking-wide text-muted">Recommended landed cost</p>
-        <p className="tabular mt-2 font-display text-3xl font-semibold">{formatINR(s.best_landed, { unit: true })}</p>
+        <p className="tabular mt-2 font-display text-3xl font-semibold"><span className="landed">{formatINR(s.best_landed, { unit: true })}</span></p>
         <p className="mt-1 text-sm text-muted">per {unitWord}, GST and delivery included</p>
       </Card>
       <Card className="p-5">

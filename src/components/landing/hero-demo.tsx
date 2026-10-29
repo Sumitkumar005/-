@@ -116,7 +116,7 @@ export function HeroDemo() {
                       </div>
                       <div className="text-right">
                         {negotiated && q.after ? <p className="tabular text-[10px] text-muted line-through">₹{q.landed.toFixed(2)}</p> : null}
-                        <p className={cx("tabular font-display text-[17px] font-semibold leading-none", negotiated && q.after ? "text-mint-deep" : "")}>₹{price.toFixed(2)}</p>
+                        <p className="tabular font-display text-[17px] font-semibold leading-none"><span className="landed">₹{price.toFixed(2)}</span></p>
                       </div>
                     </div>
                   );

@@ -102,7 +102,7 @@ export function HowItWorks() {
             <div key={r.raw}>
               <div className="flex justify-between text-[10.5px]">
                 <span className="font-mono text-muted">{r.raw}</span>
-                <span className={cx("tabular font-semibold", r.hi && "text-mint-deep")}>₹{r.v.toFixed(2)}</span>
+                <span className="tabular font-semibold"><span className="landed">₹{r.v.toFixed(2)}</span></span>
               </div>
               <div className="mt-1 h-1.5 rounded-full bg-line">
                 <div className={cx("h-full rounded-full", r.hi ? "bg-mint" : "bg-ink/70")} style={{ width: `${r.w}%` }} />
@@ -121,7 +121,7 @@ export function HowItWorks() {
           <ArrowRight weight="bold" className="h-6 w-6 text-marigold-deep" />
           <div className="text-center">
             <p className="text-[11px] uppercase tracking-wide text-muted">After one call</p>
-            <p className="tabular font-display text-5xl font-semibold text-mint-deep">₹1.45</p>
+            <p className="tabular font-display text-5xl font-semibold"><span className="landed">₹1.45</span></p>
           </div>
           <span className="absolute bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-white px-3 py-1 text-[11px] font-medium shadow-sm ring-1 ring-line">−5.8% · cited a verified competing quote</span>
         </div>
@@ -141,7 +141,7 @@ export function HowItWorks() {
                   <p className="text-[10.5px] text-muted">{r.s}</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="tabular font-display text-[15px] font-semibold">{r.p}</span>
+                  <span className="tabular font-display text-[15px] font-semibold"><span className="landed">{r.p}</span></span>
                   {r.best ? (
                     <span className="flex items-center gap-1 rounded-lg bg-[#25D366] px-2 py-1 text-[10px] font-semibold text-white">
                       <WhatsappLogo weight="fill" className="h-3 w-3" /> Chat
@@ -210,7 +210,7 @@ export function BeforeAfter() {
               ["₹1.78", "Chawri Bazar", false],
             ].map(([p, n, b]) => (
               <div key={n as string} className={cx("rounded-xl border p-2.5", b ? "border-ink bg-paper" : "border-line")}>
-                <p className="tabular font-display text-lg font-semibold">{p}</p>
+                <p className="tabular font-display text-lg font-semibold"><span className="landed">{p}</span></p>
                 <p className="truncate text-[10.5px] text-muted">{n}</p>
               </div>
             ))}

@@ -42,3 +42,16 @@ h1, h2, h3, .font-display {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* The landed-cost signal: wherever a price is "what it costs at your door", it looks like this. */
+.landed {
+  color: #067647;
+  background-image: linear-gradient(transparent 62%, rgba(18, 183, 106, 0.22) 62%, rgba(18, 183, 106, 0.22) 92%, transparent 92%);
+  padding: 0 0.12em;
+  margin: 0 -0.12em;
+  border-radius: 2px;
+}
+.landed-dark {
+  color: #3EE8A0;
+  text-shadow: 0 0 22px rgba(18, 183, 106, 0.55);
+}

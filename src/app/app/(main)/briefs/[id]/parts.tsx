@@ -52,7 +52,7 @@ export function Shortlist({ view, unitWord, busy, onSelect }: { view: BriefView;
                 <TrustBadge band={s.trustBand} score={s.trustScore} />
               </div>
               <div className="mt-4 flex items-end gap-2">
-                <p className="tabular font-display text-3xl font-semibold">{formatINR(q.landed_unit_cost, { unit: true })}</p>
+                <p className="tabular font-display text-3xl font-semibold"><span className="landed">{formatINR(q.landed_unit_cost, { unit: true })}</span></p>
                 <p className="pb-1 text-xs text-muted">landed / {unitWord}</p>
               </div>
               {q.first_landed != null && q.landed_unit_cost != null && q.first_landed > q.landed_unit_cost ? (
@@ -156,7 +156,7 @@ export function QuoteSheet({ view, unitWord }: { view: BriefView; unitWord: stri
                   <td className="tabular px-4 py-3">{q.moq ? formatNumber(q.moq) : "–"}</td>
                   <td className="px-4 py-3">{q.lead_time_days != null ? `${q.lead_time_days} d` : "–"}</td>
                   <td className="px-4 py-3">{payText(q)}</td>
-                  <td className="tabular px-4 py-3 text-right font-display text-base font-semibold text-ink">{q.landed_unit_cost != null ? formatINR(Number(q.landed_unit_cost), { unit: true }) : "–"}</td>
+                  <td className="tabular px-4 py-3 text-right font-display text-base font-semibold text-ink">{q.landed_unit_cost != null ? <span className={out ? "" : "landed"}>{formatINR(Number(q.landed_unit_cost), { unit: true })}</span> : "–"}</td>
                   <td className="max-w-[220px] px-4 py-3">
                     <div className="flex flex-wrap gap-1">
                       {q.flags.map((f) => (

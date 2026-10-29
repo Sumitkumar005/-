@@ -69,7 +69,7 @@ export default async function Dashboard() {
                     <div className="text-sm sm:text-right">
                       {b.summary.best_landed != null ? (
                         <>
-                          <p className="tabular font-display text-lg font-semibold">{formatINR(b.summary.best_landed, { unit: true })}</p>
+                          <p className="tabular font-display text-lg font-semibold"><span className="landed">{formatINR(b.summary.best_landed, { unit: true })}</span></p>
                           <p className="text-xs text-muted">best landed / {b.unit === "pieces" ? "piece" : b.unit.replace(/s$/, "")}</p>
                         </>
                       ) : (

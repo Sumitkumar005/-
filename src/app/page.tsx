@@ -56,7 +56,7 @@ export default function Landing() {
         <div className="absolute right-[-8%] top-[-25%] h-[620px] w-[620px] rounded-full bg-marigold/[0.16] blur-[130px]" />
         <div className="absolute bottom-[-30%] left-[-10%] h-[520px] w-[520px] rounded-full bg-[#14B8A6]/[0.12] blur-[130px]" />
         <div className="absolute left-1/2 top-0 h-px w-[60%] -translate-x-1/2 bg-gradient-to-r from-transparent via-marigold/50 to-transparent" />
-        <div className="relative mx-auto grid max-w-[1440px] items-center gap-12 px-5 sm:px-8 lg:px-12 pb-20 pt-14 lg:grid-cols-[1fr_460px] lg:gap-16 xl:grid-cols-[1fr_520px] xl:gap-24 lg:pb-24 lg:pt-20">
+        <div className="relative mx-auto grid max-w-[1440px] items-center gap-12 px-5 sm:px-8 lg:px-12 pb-16 pt-12 lg:grid-cols-[1fr_460px] lg:gap-16 xl:grid-cols-[1fr_520px] xl:gap-24 lg:pb-16 lg:pt-14">
           <div className="animate-rise">
             <a href="#how" className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] py-1 pl-1 pr-3 text-[13px] text-white/75 transition hover:border-white/20">
               <span className="rounded-full bg-marigold px-2 py-0.5 text-[11px] font-semibold text-ink">New</span>
@@ -69,6 +69,16 @@ export default function Landing() {
               <br />
               <span className="bg-gradient-to-r from-marigold to-[#FFD37A] bg-clip-text text-transparent">Best 3 suppliers out.</span>
             </h1>
+            <p lang="hi" className="mt-4 font-hindi text-[20px] font-semibold leading-snug text-white/85 xl:text-[24px]">
+              भाव-ताव हम करेंगे,{" "}
+              <span className="relative inline-block text-marigold">
+                आप बस चुनिए।
+                <svg viewBox="0 0 120 10" preserveAspectRatio="none" className="absolute -bottom-1.5 left-0 h-2 w-full" aria-hidden>
+                  <path d="M2 7c30-5 76-6 116-2" fill="none" stroke="#FFB21E" strokeWidth="2.5" strokeLinecap="round" opacity="0.7" />
+                </svg>
+              </span>
+              <span className="sr-only"> (We do the haggling, you just choose.)</span>
+            </p>
             <p className="mt-5 max-w-[560px] text-[17px] leading-relaxed text-white/65 xl:text-[19px]">
               BhavTaav calls wholesalers for you in Hindi and English, checks their GST, compares every quote rupee for rupee at your door and negotiates. You only talk to the ones worth talking to.
             </p>
@@ -140,6 +150,9 @@ export default function Landing() {
             <p className="text-[12px] font-semibold uppercase tracking-[0.14em] text-marigold">Like-for-like quote sheet</p>
             <h2 className="mt-3 text-[32px] font-bold leading-tight sm:text-[38px]">Four ways of quoting. One number to compare.</h2>
             <p className="mt-4 text-[16px] leading-relaxed text-white/65">Price basis, GST, freight, plate charges and MOQ, all converted to landed cost per unit at your door. Every assumption is shown.</p>
+            <p className="mt-4 text-[14px] text-white/55">
+              Wherever you see a price in <span className="landed-dark font-semibold">green</span>, it&apos;s landed cost: what one unit costs at your door, GST and delivery included.
+            </p>
             <ul className="mt-7 space-y-3 text-[15px] text-white/80">
               {["Unit price, MOQ, GST, freight and lead time", "Payment terms, advance and sample cost", "Defect and replacement policy", "A flag when a price is too good to be true"].map((t) => (
                 <li key={t} className="flex gap-3">
@@ -159,7 +172,7 @@ export default function Landing() {
                   <li key={q.raw} className="flex items-center gap-4 py-3.5">
                     <p className="flex-1 font-mono text-[12.5px] leading-relaxed text-ink-soft">{q.raw}</p>
                     <div className="w-[128px] text-right">
-                      <p className={cx("tabular font-display text-xl font-semibold", q.tone === "bad" && "text-coral", q.tone === "good" && "text-mint-deep")}>{q.landed}</p>
+                      <p className={cx("tabular font-display text-xl font-semibold", q.tone === "bad" && "text-coral")}>{q.tone === "bad" ? q.landed : <span className="landed">{q.landed}</span>}</p>
                       <p className={cx("text-[11px]", q.tone === "good" ? "text-mint-deep" : q.tone === "bad" ? "text-coral" : q.tone === "warn" ? "text-[#8A5A00]" : "text-muted")}>{q.note}</p>
                     </div>
                   </li>
@@ -318,7 +331,8 @@ export default function Landing() {
         <div className="relative mx-auto max-w-[1440px] overflow-hidden rounded-[28px] bg-ink px-8 py-16 text-center text-white">
           <div className="grid-bg absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]" />
           <div className="absolute inset-x-0 -top-32 mx-auto h-64 w-[34rem] rounded-full bg-marigold/25 blur-3xl" />
-          <h2 className="relative text-[34px] font-bold sm:text-[44px]">Stop calling. Start choosing.</h2>
+          <p lang="hi" className="relative font-hindi text-[18px] font-semibold text-marigold">भाव-ताव हम करेंगे</p>
+          <h2 className="relative mt-2 text-[34px] font-bold sm:text-[44px]">Stop calling. Start choosing.</h2>
           <p className="relative mx-auto mt-3 max-w-lg text-[16px] text-white/65">Your first sourcing brief is on us. Tell us what you buy every month and see what it should cost.</p>
           <ButtonLink href="/login?mode=signup" variant="primary" size="lg" className="relative mt-8 shadow-[0_8px_30px_-6px_rgba(255,178,30,0.55)]">
             Start your first brief <ArrowRight weight="bold" className="h-4 w-4" />
