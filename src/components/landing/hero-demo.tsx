@@ -14,9 +14,9 @@ const LINES = [
 ] as const;
 
 const QUOTES = [
-  { name: "Gurgaon Cup House", raw: "₹1.14 incl. GST, free delivery", landed: 1.54, after: 1.45, trust: 92 },
+  { name: "Gurgaon Cup House", raw: "₹1.14 incl. GST, plate ₹2,000", landed: 1.54, after: 1.45, trust: 92 },
   { name: "Okhla Cupcraft", raw: "₹1.06 + 18% GST, plate ₹1,500", landed: 1.6, after: 1.53, trust: 88 },
-  { name: "Bawana Paper Cups", raw: "₹990 per 1000, to-pay freight", landed: 1.36, after: null, trust: 85, flag: "MOQ 10,000" },
+  { name: "Bawana Paper Cups", raw: "₹1,020 / 1000 + GST, to-pay, plate ₹1,000", landed: 1.36, after: null, trust: 85, flag: "MOQ 10,000" },
 ];
 
 const PHASES = [

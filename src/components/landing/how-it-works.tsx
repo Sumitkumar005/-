@@ -94,10 +94,10 @@ export function HowItWorks() {
       <Card n="05" title="Compare" body="Per kg, per thousand, GST extra, to-pay freight. Every quote becomes one landed cost at your door." className="md:col-span-2">
         <div className="absolute inset-0 flex flex-col justify-center gap-2.5 px-5">
           {[
-            { raw: "₹990 / 1000 + GST", v: 1.36, w: 72, hi: false },
-            { raw: "₹1.14 incl. GST", v: 1.45, w: 77, hi: true },
-            { raw: "₹182 / kg", v: 1.53, w: 81, hi: false },
-            { raw: "₹1.19 + freight", v: 1.86, w: 98, hi: false },
+            { raw: "₹1,020 / 1000 + GST", v: 1.36, w: 72, hi: false },
+            { raw: "₹1.05 incl. GST + plate", v: 1.45, w: 77, hi: true },
+            { raw: "₹1.00 + GST + plate", v: 1.53, w: 81, hi: false },
+            { raw: "₹1.50 + GST, freight ₹300", v: 1.84, w: 98, hi: false },
           ].map((r) => (
             <div key={r.raw}>
               <div className="flex justify-between text-[10.5px]">

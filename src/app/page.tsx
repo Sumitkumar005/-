@@ -4,13 +4,22 @@ import { ButtonLink, cx } from "@/components/ui";
 import { HeroDemo } from "@/components/landing/hero-demo";
 import { BeforeAfter, HowItWorks } from "@/components/landing/how-it-works";
 import { PRODUCTS } from "@/components/landing/illustrations";
+import { FreeTools } from "@/components/landing/free-tools";
+import { computeLanded, type QuoteTerms } from "@/lib/domain/landed-cost";
 
-const RAW_QUOTES = [
-  { raw: "₹990 per 1000 + 18% GST, transport to-pay, MOQ 10,000", landed: "₹1.36", note: "MOQ is twice your order", tone: "warn" },
-  { raw: "₹1.14 per piece, GST included, free delivery, 5 days", landed: "₹1.45", note: "Recommended", tone: "good" },
-  { raw: "₹182 per kg, about 170 pieces a kg, plate ₹1,500 once", landed: "₹1.43", note: "Includes one-time plate cost", tone: "neutral" },
-  { raw: "₹0.55 per piece, 100% advance", landed: "Blocked", note: "GSTIN fails checksum", tone: "bad" },
-] as const;
+// Example quotes for 5,000 cups. Landed costs are computed from the stated terms, not typed in.
+const QTY = 5000;
+const EXAMPLES: { raw: string; terms: QuoteTerms | null; note: string; tone: "warn" | "good" | "neutral" | "bad" }[] = [
+  { raw: "₹990 per 1000 + 18% GST, transport to-pay, MOQ 10,000", terms: { unitPrice: 990, priceBasis: "per_1000", gstIncluded: false, gstRate: 0.18, freightMode: "to_pay", moq: 10000, leadTimeDays: 10 }, note: "MOQ is twice your order", tone: "warn" },
+  { raw: "₹1.05 per piece, GST included, free delivery, plate ₹2,000 once", terms: { unitPrice: 1.05, priceBasis: "per_unit", gstIncluded: true, freightMode: "included", setupCost: 2000, leadTimeDays: 5 }, note: "Recommended: trusted, 5 days", tone: "good" },
+  { raw: "₹182 per kg, about 170 pieces a kg, freight ₹450, plate ₹1,500", terms: { unitPrice: 182, priceBasis: "per_kg", unitsPerBasis: 170, gstIncluded: false, gstRate: 0.18, freightMode: "fixed", freightAmount: 450, setupCost: 1500, leadTimeDays: 6 }, note: "Per kg looked cheap. It isn't.", tone: "neutral" },
+  { raw: "₹0.55 per piece, 100% advance", terms: null, note: "GSTIN fails checksum", tone: "bad" },
+];
+const RAW_QUOTES = EXAMPLES.map((e) => {
+  if (!e.terms) return { ...e, landed: "Blocked" };
+  const r = computeLanded(e.terms, { quantity: QTY, unit: "pieces", defaultGstRate: 0.18 });
+  return { ...e, landed: r.comparable ? `₹${r.landedUnit.toFixed(2)}` : "–" };
+});
 
 const COMPARE = [
   ["Works for", "The seller who bought your lead", "You, the buyer"],
@@ -39,7 +48,7 @@ export default function Landing() {
         <nav className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12">
           <Logo dark />
           <div className="hidden items-center gap-1 text-[14px] text-white/65 md:flex">
-            {[["How it works", "#how"], ["Quote sheet", "#compare"], ["Trust", "#trust"], ["Pricing", "#pricing"], ["FAQ", "#faq"]].map(([l, h]) => (
+            {[["How it works", "#how"], ["Free tools", "#tools"], ["Trust", "#trust"], ["Pricing", "#pricing"], ["FAQ", "#faq"]].map(([l, h]) => (
               <a key={h} href={h} className="rounded-md px-3 py-1.5 transition hover:bg-white/5 hover:text-white">{l}</a>
             ))}
           </div>
@@ -179,6 +188,16 @@ export default function Landing() {
                 ))}
               </ul>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Free tools */}
+      <section id="tools" className="scroll-mt-16 border-b border-line bg-paper/60 py-20 lg:py-24">
+        <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+          <SectionHead eyebrow="Free tools, no sign-up" title="Already have quotes? Compare them now." body="The same landed-cost maths and GSTIN check our agent uses, in your browser. Nothing is saved or sent anywhere." />
+          <div className="mx-auto mt-10 max-w-[1180px]">
+            <FreeTools />
           </div>
         </div>
       </section>
