@@ -47,6 +47,24 @@ export const FLAG_LABEL: Record<string, string> = {
   quote_expired: "Quote validity has expired",
 };
 
+/** Short chip labels for tables. */
+export const FLAG_SHORT: Record<string, string> = {
+  unit_not_comparable: "Unit unclear",
+  moq_above_qty: "MOQ above qty",
+  freight_estimated: "Freight estimated",
+  gst_assumed: "GST assumed",
+  setup_cost_one_time: "One-time setup",
+  misses_deadline: "Misses deadline",
+  lead_time_unknown: "Lead time unknown",
+  over_budget: "Over budget",
+  high_advance: "High advance",
+  needs_confirmation: "Confirming",
+  no_sample: "No sample",
+  too_good_to_be_true: "Too cheap, verify",
+  well_above_market: "Above market",
+  quote_expired: "Expired",
+};
+
 /** Flags that should stop a quote from being recommended without a human look. */
 export const SERIOUS_FLAGS = new Set(["unit_not_comparable", "too_good_to_be_true", "quote_expired"]);
 

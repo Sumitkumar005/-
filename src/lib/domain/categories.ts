@@ -11,6 +11,8 @@ export type SpecField = {
   suffix?: string;
   required: boolean;
   hint?: string;
+  /** How the value reads in a one-line summary, e.g. "{v} wall". */
+  display?: string;
   /** Part of the price key: two specs with the same priced fields are price-comparable. */
   priced?: boolean;
 };
@@ -40,7 +42,7 @@ export const CATEGORIES: CategoryTemplate[] = [
     keywords: ["paper cup", "cups", "coffee cup", "tea cup", "kulhad cup", "glass paper"],
     fields: [
       { key: "capacity_ml", label: "Capacity", type: "number", suffix: "ml", required: true, priced: true },
-      { key: "wall", label: "Wall", type: "select", options: ["single", "double", "ripple"], required: true, priced: true },
+      { key: "wall", label: "Wall", type: "select", options: ["single", "double", "ripple"], required: true, priced: true, display: "{v} wall" },
       { key: "gsm", label: "Paper GSM", type: "number", suffix: "gsm", required: false, priced: true, hint: "Leave blank if unsure, we will ask suppliers to propose" },
       { key: "print", label: "Print", type: "select", options: PRINT_OPTIONS, required: true, priced: true },
       { key: "lid", label: "Lids needed", type: "boolean", required: false },
@@ -181,6 +183,7 @@ export function describeSpec(categoryId: string, spec: Record<string, unknown>):
       const v = spec[f.key];
       if (v === undefined || v === null || v === "") return null;
       if (f.type === "boolean") return v ? f.label.toLowerCase() : null;
+      if (f.display) return f.display.replace("{v}", String(v));
       return f.suffix ? `${v} ${f.suffix}` : String(v);
     })
     .filter(Boolean)

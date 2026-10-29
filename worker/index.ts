@@ -8,6 +8,15 @@ import { llmName } from "@/lib/llm/client";
 import type { Job } from "@/lib/db/types";
 import { runJob } from "@/lib/pipeline/runner";
 
+// Load .env.local like Next.js does (config is read lazily, so this runs before any use).
+for (const file of [".env.local", ".env"]) {
+  try {
+    process.loadEnvFile(file);
+  } catch {
+    // file not present
+  }
+}
+
 const WORKER_ID = `${hostname()}:${process.pid}`;
 const IDLE_MS = 1500;
 let stopping = false;

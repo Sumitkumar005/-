@@ -408,6 +408,12 @@ async function saveQuote(brief: Brief, bs: BriefSupplier, supplier: Supplier, it
     "save quote",
   ) as Quote;
 
+  // Provisional landed cost so the buyer sees comparable numbers while calls are still going.
+  const provisional = computeLanded(quoteTerms(quote), briefTerms(brief));
+  if (provisional.comparable) {
+    await db().from("quotes").update({ landed_unit_cost: provisional.landedUnit, landed_total: provisional.landedTotal, effective_qty: provisional.effectiveQty, flags: provisional.flags }).eq("id", quote.id);
+  }
+
   await updateBs(bs.id, { status: "quoted" });
   if (needsConfirmation) {
     await openOpsTask({
@@ -544,7 +550,8 @@ const compare: Handler = async (job, brief) => {
     }
     return;
   }
-  await enqueue("shortlist", brief.id, {}, { dedupeKey: `shortlist:${brief.id}:${brief.run_no}:${round}` });
+  // Keyed to this compare job, so a re-compare (ops fix, search again) always produces a fresh shortlist.
+  await enqueue("shortlist", brief.id, {}, { dedupeKey: `shortlist:${job.id}` });
 };
 
 // ---------------------------------------------------------------------------

@@ -35,7 +35,7 @@ Goal of v1: take one buyer brief in food/D2C packaging in Delhi NCR and return a
 +----------+  +-----------+  +-------------+  +----------------+
 ```
 
-Principle: **one workflow per brief, many small agents, one shared supplier database.** Each agent does one job and has a narrow set of tools. The workflow engine, not the LLM, decides what runs next. That keeps cost, retries and audit under control.
+Principle: **one workflow per brief, many small agents, one shared supplier database.** Each agent does one job and has a narrow set of tools. The workflow engine, not the LLM, decides what runs next. That keeps cost, retries and audit under control. The exact schema is in `supabase/migrations/`; section 3 below is the original sketch.
 
 ## 2. The eight steps in detail
 
@@ -153,21 +153,31 @@ event_log        (id, brief_id, step, actor[agent|ops|buyer], payload_json, at)
 
 `price_point` and the `supplier` behaviour fields together are the long-term asset. Design them carefully from day one.
 
-## 4. Tech stack (recommended)
+## 4. Tech stack (as built in v1)
 
-| Layer | Choice | Why |
-|-------|--------|-----|
-| Backend | Python, FastAPI | Best ecosystem for LLM, voice and data work |
-| Workflow engine | Temporal (or Inngest if we want lighter) | Briefs run for days, need retries, timers and human waits. Do not build this on cron jobs |
-| Database | Postgres (Supabase or Neon) + pgvector | One DB for relational data and supplier similarity search |
-| Cache / queues | Redis | Rate limits per supplier, call slots |
-| LLM | Claude models: a large model for brief understanding, negotiation and comparison reasoning, a small fast model for extraction and classification | Strong tool use, good at structured output; route by task to control cost |
-| Voice telephony | Exotel or Plivo (Indian numbers, registered) | Local numbers, compliant routing, cheaper than global options |
-| Voice AI | Start with a managed Indian voice agent platform (Bolna, Sarvam, or similar) for Hinglish STT/TTS; move to own pipeline (STT + LLM + TTS) when volume justifies | Speed to pilot first, cost control later |
-| WhatsApp | Meta WhatsApp Cloud API via a BSP (Gupshup, Interakt, or direct) | Main buyer channel and written quotes |
-| GST data | GSP API provider | Return filing data needs a GSP, not just the public search |
-| Frontend | Next.js for buyer web view and ops console | Fast to build, easy to host |
-| Observability | Langfuse (LLM traces), Sentry, call recordings in object storage | Every call and every agent decision must be replayable |
+The first draft of this doc proposed FastAPI + Temporal. For a two-person pilot that is over-built, so v1 ships as one TypeScript codebase on free tiers. The upgrade path is listed for when volume needs it.
+
+| Layer | v1 choice | Why | Upgrade when needed |
+|-------|-----------|-----|---------------------|
+| Web app + API | Next.js 16 (App Router), Tailwind | One codebase for landing page, buyer app, ops desk and API | Split API out only if a mobile app needs it |
+| Database + auth | Supabase free (Postgres, Auth, RLS) | Free, managed, row-level security | Supabase Pro |
+| Workflow engine | Postgres `jobs` table + `claim_job()` (FOR UPDATE SKIP LOCKED) + a Node worker | Durable, retryable, no extra infra; survives restarts | Temporal or Inngest above ~1,000 briefs/day |
+| LLM | Groq free tier: gpt-oss-120b (strict JSON schema), gpt-oss-20b (cheap tasks), llama-3.3-70b fallback; offline mock without a key | Free, fast, structured output | Paid Groq tier or Claude for negotiation reasoning |
+| Voice | Provider interface: `simulated` (default) or `bolna` (real calls, Exotel telephony, webhook back) | Demo end to end without dialling anyone; real calls are one env var away | Own STT + LLM + TTS pipeline at scale |
+| Discovery | Own directory, CSV import, manual add, optional Google Places | No scraping risk | Partnerships with directories |
+| GST | Offline GSTIN checksum + state check; adapter for a GSP | Honest about what is and is not checked | Contract a GSP |
+
+Code map:
+
+```
+src/lib/domain/      pure logic, fully unit tested (landed cost, GST, trust ledger, ranking, hours, negotiation guard)
+src/lib/agents/      brief parsing, call script, quote extraction (LLM + zod validation)
+src/lib/voice/       provider interface, supplier simulator, Bolna adapter
+src/lib/pipeline/    job steps (scout, vet, schedule_calls, call, extract, compare, negotiate, shortlist), runner, trust service
+worker/index.ts      polls jobs, runs steps
+src/app/             landing page, buyer app, ops desk, API routes, Bolna webhook
+supabase/            schema migration (RLS, job queue) and demo seed
+```
 
 ## 5. Human in the loop (v1 must have this)
 

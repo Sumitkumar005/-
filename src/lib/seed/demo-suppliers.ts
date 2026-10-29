@@ -90,10 +90,12 @@ export type DemoSupplierRow = Record<string, unknown> & { name: string; phone: s
 
 export function demoSuppliers(): DemoSupplierRow[] {
   return SEEDS.map((s, i) => {
-    let gstin: string | null = buildGstin(STATE_CODE[s.state], pan(i, s.manufacturer));
-    if (s.gstin === "none") gstin = null;
-    if (s.gstin === "bad_checksum") gstin = gstin.slice(0, 14) + (gstin[14] === "A" ? "B" : "A");
-    if (s.gstin === "wrong_state") gstin = buildGstin("08", pan(i, s.manufacturer));
+    const valid = buildGstin(STATE_CODE[s.state], pan(i, s.manufacturer));
+    const gstin =
+      s.gstin === "none" ? null
+      : s.gstin === "bad_checksum" ? valid.slice(0, 14) + (valid[14] === "A" ? "B" : "A")
+      : s.gstin === "wrong_state" ? buildGstin("08", pan(i, s.manufacturer))
+      : valid;
     const profile: SimProfile = {
       persona: s.persona ?? "cooperative",
       answer_rate: s.persona === "busy" ? 0.95 : 0.88,

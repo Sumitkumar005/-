@@ -5,7 +5,7 @@
   "description": "Buyer-side AI sourcing agent for Indian wholesale",
   "scripts": {
     "dev": "next dev",
-    "worker": "tsx --env-file-if-exists=.env.local worker/index.ts",
+    "worker": "tsx worker/index.ts",
     "dev:all": "concurrently -n web,worker -c blue,magenta \"npm:dev\" \"npm:worker\"",
     "build": "next build",
     "start": "next start",

@@ -142,3 +142,19 @@ describe("sourcing pipeline (offline)", () => {
     void briefId;
   });
 });
+
+describe("re-compare after an ops correction", () => {
+  it("moves back to a fresh shortlist", async () => {
+    const { db, briefId } = await setup("Need 5000 printed 250ml single wall paper cups 2 colour logo every month, currently paying Rs 1.6, deliver 122002");
+    await drain(db);
+    const brief = db.t("briefs").find((b) => b.id === briefId)!;
+    expect(brief.status).toBe("shortlist_ready");
+    // Simulate what /api/ops/quotes/[id] does
+    const q = db.t("quotes").find((x) => x.is_latest && x.flags.includes("unit_not_comparable"))!;
+    Object.assign(q, { units_per_basis: 150, needs_confirmation: false });
+    await db.from("jobs").insert({ type: "compare", brief_id: briefId, payload: { round: 1, final: true }, dedupe_key: `compare:${briefId}:fix:1` });
+    await drain(db);
+    expect(db.t("briefs").find((b) => b.id === briefId)!.status).toBe("shortlist_ready");
+    expect(db.t("quotes").find((x) => x.id === q.id)!.landed_unit_cost).toBeGreaterThan(0);
+  });
+});

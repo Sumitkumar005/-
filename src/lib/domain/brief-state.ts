@@ -32,12 +32,12 @@ const NEXT: Record<BriefStatus, BriefStatus[]> = {
   calling: ["comparing", "cancelled", "needs_attention"],
   comparing: ["negotiating", "in_review", "shortlist_ready", "cancelled", "needs_attention"],
   negotiating: ["comparing", "in_review", "shortlist_ready", "cancelled", "needs_attention"],
-  in_review: ["shortlist_ready", "cancelled", "needs_attention"],
-  shortlist_ready: ["supplier_selected", "cancelled", "confirmed"],
+  in_review: ["shortlist_ready", "comparing", "cancelled", "needs_attention"],
+  shortlist_ready: ["supplier_selected", "comparing", "cancelled", "confirmed"],
   supplier_selected: ["completed", "supplier_selected", "cancelled"],
   completed: [],
   cancelled: [],
-  needs_attention: ["confirmed", "cancelled"],
+  needs_attention: ["confirmed", "comparing", "cancelled"],
 };
 
 export function canTransition(from: BriefStatus, to: BriefStatus): boolean {
